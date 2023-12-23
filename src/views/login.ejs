@@ -1,0 +1,75 @@
+<div class="my-5 d-flex justify-content-center">
+  <div class="card p-5 w-75 shadow">
+    <h1 class="mb-4 header">Login</h1>
+
+    <% if(message) { %>
+    <div class="alert alert-danger" role="alert"><%= message %></div>
+    <% } %>
+
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseOne"
+            aria-expanded="true"
+            aria-controls="collapseOne"
+          >
+            Test User Info
+          </button>
+        </h2>
+        <div
+          id="collapseOne"
+          class="accordion-collapse collapse show"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            Email
+            <span class="fw-bold text-success">admin@gmail.com</span> password:
+            <span class="fw-bold text-success">123456</span>
+            <br />
+            Email:
+            <span class="fw-bold text-success">emp1@gmail.com</span> password:
+            <span class="fw-bold text-success">123456</span>
+            <br />
+            Email:
+            <span class="fw-bold text-success">emp2@gmail.com</span> password:
+            <span class="fw-bold text-success">123456</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form action="/api/v1/auth/login" method="POST" class="pt-2">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email Address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="please enter your email"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          placeholder="please enter your password"
+          required
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary w-50">Login</button>
+      <button type="button" class="btn btn-link">
+        <a href="/api/v1/auth/register">Register</a>
+      </button>
+    </form>
+  </div>
+</div>
