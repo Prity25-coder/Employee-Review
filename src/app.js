@@ -11,9 +11,12 @@ import session from "express-session";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import compression from "compression";
+import MongoStore from "connect-mongo";
+import mongoose from "mongoose";
 
 // user defined modules
 import config from "./config/config.js";
+import connectToMongoDB from "./config/db.config.js";
 import { authRouter } from "./api/v1/features/auth/index.js";
 import {
   loggerMiddleware,
@@ -25,6 +28,18 @@ import { employeeRouter } from "./api/v1/features/employee/index.js";
 import { reviewRouter } from "./api/v1/features/review/indes.js";
 
 const app = express();
+
+//* database connection
+await connectToMongoDB(); // todo how can i write it inside async func
+
+// create Store for storing sessions
+const store = MongoStore.create({
+  client: mongoose.connection.getClient(),
+  dbName: mongoose.connection.name,
+  collectionName: "sessions",
+  stringify: false,
+  ttl: 15 * 60, // todo storing session for 15 min
+});
 
 // session configuration
 const { sessionSecret, sessionTimeOut } = config;
